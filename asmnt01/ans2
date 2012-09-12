@@ -1,0 +1,41 @@
+# This program takes an array variables and stores the biggest 1 in largest!
+# Program Area
+0x1013	# [0] LA:     accum = 4 (the first element in the array)
+0x2012	# [1] STORE:  accum to Largest[0x0011] Largest == 4
+0xb001	# [2] LA: 	  accum = 1
+0x9010	# [3] SUB:    accum = 8 - 1 (n - 1)
+0x4000	# [4] MVAC: ctr = accum
+0x600f	# [5] LOOP: JLT END if(ctr < 0) goto end[0xf] 
+0x
+0xb013	# [6] 	LA: move the 
+0x9011	# [7]
+0x0000	# [8]
+0x0000	# [9]
+0x0000	# [a]
+0x0000	# [b]
+0x0000	# [c]
+#
+# blank data area
+0x0000	# [d]
+0x0000	# [e]
+0x0000	# [f] end of program
+#
+# Data Area: 
+#		array data starts at 0x0012, N at 0x0010
+#		largest stored at 0x0011
+#
+# Temporary variable
+0x0000	# [10] Temp:
+0x0008  # [11] n: The number of elements
+0x0000  # [12] largest:
+0x0004  # [13] array[0]
+0x0008  # [14] array[1]
+0x0010  # [15] array[2]
+0x0040  # [16] array[3]
+0xFFFD  # [17] array[4]
+0x0009  # [18] array[5]
+0xFEDC  # [19] array[6]
+0x0004  # [1a] array[7]
+#
+# Temporary variable
+0x0000	# [1a]

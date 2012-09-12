@@ -1,0 +1,56 @@
+#
+# largest - find the largest element in an array of length N.
+# 
+#  The algorithm below proceeds as follows:
+#     initialize the variable LARGEST with the first element of ARRAY
+#     for each element starting at the end of the array, 
+#	  subtract the current element from LARGEST 
+#	  if the result is < 0, replace LARGEST with the current element
+#
+#  Temporaries are used to hold the current element and the current 
+#  counter value so that we can reuse the ctr and accum registers to
+#  form the difference and compare the result to zero.
+#     
+
+# Step one - put N-1 in ctr (you will need a constant one for this)
+
+# Step two - initialize LARGEST to the first element of ARRAY
+
+# LOOP:
+# If the ctr is less than zero, we are done. Branch to the end.
+# (you could just HALT here, but it is better form to stop at the end.)
+
+# store the ctr contents in a temporary, 'cause we need the ctr reg  
+# to do the comparison (note that the ctr is still valid!) Since you 
+# can only store from the accumulator, and you can only ADD to the accum
+# from the ctr, this is a several step process!
+
+# add the base address of ARRAY to the ctr register and place in the accum
+# this puts the address of the current element in the accumulator
+
+# now use the address in the accumulator to get the next element and
+# place it in the accumulator.
+
+# save the current element in a temporary, 'cause we'll need it later.
+
+# create the difference (LARGEST - current element)
+
+# compare the difference to zero. If it is less than zero, jump
+# to REPLACE
+
+# at this point, LARGEST is correct. jump to the end of the loop (NEXT)
+# (where we will reload the ctr and decrement it)
+
+# REPLACE: now replace LARGEST with your temporary that contains the 
+# current element
+
+# NEXT: load the current ctr again, and decrement it
+
+# jump to the beginning of the loop (LOOP)
+
+# that's it (END:)
+
+# data area follows. I suggest you put some padding words in the middle
+# in case you need to add instructions. Remember, you will want to be
+# able to vary the size of the array without rewriting your instructions!
+

@@ -1,0 +1,25 @@
+Part One
+Before doing this part, read the handout entitled SimpleMachine.
+In the SimpleMachine handout, the instructions for the Simple Machine were detailed, as well as the
+specification for our register transfer language (rtl). 
+Part of the algorithm necessary for simulating (or microprogramming) the operation of our Simple Machine using rtl was also provided. 
+
+In this part, you willfinish this algorithm by: 
+	
+	adding the clauses necessary for each of the missing instructions. 
+	
+	You should refer to the handout SimpleMachineDatapaths for details on which registers can be transferred to which
+	other registers and in what directions (although you should only have to use this for checking your work).
+
+	Also remember that each instruction cycle is limited to a single instruction memory cycle and a single
+	data memory cycle.
+
+	Hand in a listing of your pseudocode using rtl, with sufficient documentation (using standard C or C++-
+	style comments) to indicate which instructions are which. Place the code to process the instructions in
+	the instructions' numeric order so that it is easy to follow. 
+	(i.e., the code for HALT first, then for LOAD, etc.)
+
+	You can check your work by looking at the code for the real simulator. See the file sim/simulate.c.
+	(You will also have to refer to the sim.h and inst.h header files in the sim directory.)
+
+

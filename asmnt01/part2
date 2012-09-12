@@ -1,0 +1,19 @@
+Part Two
+Before doing this part, you should experiment with the provided test programs for the sim simulator.
+You should also implement the sample programs described in Exercises-SimpleMachine.
+After implementing the three programs in the exercises you should see that there are some kinds of
+things that easy to program on the Simple Machine and some that are quite difficult. In this part you will
+continue with those experiments.
+Write a sim program to implement the following problem:
+Given a variable largest, an array of numbers (array), and the number of elements in the
+array(N), write a program to find the largest number in the array and place it in largest.
+Your solution should, of course, work for any size array of (positive or negative) numbers. I suggest that
+you use numbers that are not too large (positive or negative), say, less than 10000 decimal (0x2700). 
+You may use (in fact, you will need) temporary variables to implement this program.
+A suggested algorithm may be found as asmt01/largest.skel. Feel free to use it, to design your
+own algorithm, or something in-between.
+Hand in a paper copy of your Simple Machine program, annotated with labels, mnemonic instructions
+and comments so that it is easy to follow. The program header should contain a short description of the
+problem. (See the sample programs in the tests directory of sim as examples of annotations.)
+Transfer a copy of your program as a plain text file on hills using the procedure discussed in
+AssignmentGuidelines. The name of the program must be largest (note: there is no extension!)
