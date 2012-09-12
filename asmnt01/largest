@@ -1,0 +1,54 @@
+# -------------------------------------
+# | Written By: Morgan Mikel McDaris  |
+# -------------------------------------
+# This program takes an array variables and stores the biggest 1 in largest
+# -------------------------------------
+# | Program Area:                     |
+# -------------------------------------
+0x101d  #  [0]    LA  accum = (the first element in the array)
+0x201c  #  [1] STORE  accum to Largest[0x0011] Largest == 4
+0xb001  #  [2]    LA  accum = 1
+0x901b  #  [3]   SUB  accum = 8 - 1 (n - 1)
+0x201a  #  [4] STORE  ctrTEMP = accum 
+0x4000  #  [5]  MVAC  ctr = accum
+0x6018  #  [6] .---> LOOP: If (c < 0) Jump to (END) ----------------------------------------------.
+0xb01d  #  [7] |           LA  accum = the memory location of the first element in the array       |
+0x3000  #  [8] |         ADDC  accum = ctr + accum / add the ctr to the accum                      E
+0xc000  #  [9] |          LIA  accum = the current element in the array                            |
+0x2019  #  [a] |        STORE  eleTemp = accum                                                     N
+0x901c  #  [b] |          Sub  accum = Largest - accum                                             |
+0x4000  #  [c] |         MVAC                                                                      D
+0x6015  #  [d] |           IF (c < 0) Jump to (SETLARGEST) ----.                                   |
+0x101a  #  [e] |        .--> (ELSE) LOAD ctrTemp               |                                   O
+0x4000  #  [f] |        |           MVAC                       |                                   |
+0xa000  # [10] |        |           DEC                        |                                   F
+0x1018  # [11] |        |           LOAD accum = 0             |                                   |
+0x3000  # [12] |        |           ADDC                       |                                   P
+0x201a  # [13] |        |           STORE ctrTemp              |                                   |
+0x7006  # [14] '--------|-----------JMP (LOOP)                 |                                   R
+0x1019  # [15]          |     LOAD: eleTemp (SETLARGEST) <-----'                                   |
+0x201c  # [16]          |     STORE: largest                                                       O
+0x700e  # [17]          '---- JMP (ELSE)                                                           |
+#                                                                                                  G
+#                                                                                                  |
+0x0000  # [18] (END) <-----------------------------------------------------------------------------'
+#
+#
+# -------------------------------------
+# | variables                         |
+# -------------------------------------
+0x0000  # [19]25 < eleTemp >
+0x0000  # [1a]26 < ctrTemp >
+0x0008  # [1b]27 < n > The number of elements
+0x0000  # [1c]28 < largest >
+# -------------------------------------
+# | Array Area:                       |
+# -------------------------------------
+0x0001  # [1d] array[0]
+0x0002  # [1e] array[1]
+0xffff  # [1f] array[2]
+0x0004  # [20] array[3]
+0x0020  # [21] array[4]
+0x0006  # [22] array[5]
+0x0007  # [23] array[6]
+0x0008  # [24] array[7]
