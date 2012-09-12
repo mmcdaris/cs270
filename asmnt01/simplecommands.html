@@ -1,0 +1,247 @@
+<html>
+  <head>
+
+    <meta http-equiv="content-type" content="text/html; ">
+  </head>
+  <body bgcolor="#FFFFFF" text="#000000">
+    <table border="2" height="267" width="985">
+      <tbody>
+        <tr>
+          <td valign="top"><tt><b>instruction</b></tt><tt><b><br>
+              </b></tt></td>
+          <td valign="top"><tt><b>Encoding</b></tt><tt><br>
+            </tt></td>
+          <td valign="top"><tt><b>What's required</b></tt><tt><br>
+            </tt></td>
+          <td valign="top"><tt><b>rtl statements</b></tt><tt><br>
+            </tt></td>
+        </tr>
+        <tr>
+          <td valign="top"><tt>HALT</tt><tt><br>
+            </tt></td>
+          <td valign="top"><tt>0x0000</tt><tt><br>
+            </tt></td>
+          <td valign="top"><tt>stop the machine</tt><tt><br>
+            </tt></td>
+          <td valign="top"><tt>halt</tt><tt><br>
+            </tt></td>
+        </tr>
+        <tr>
+          <td valign="top"><tt>LOAD 4</tt><tt><br>
+            </tt></td>
+          <td valign="top"><tt>0x1004</tt><tt><br>
+            </tt></td>
+          <td valign="top"><tt>Extract the address (4) from the
+              instruction.</tt><tt><br>
+            </tt><tt>get the memory at address 4 (put in mbr)</tt><tt><br>
+            </tt><tt>Transfer it to the accumulator</tt><tt><br>
+            </tt></td>
+          <td valign="top"><tt>mar(15:10) &lt;- 0</tt><tt><br>
+            </tt><tt>mar(9:0) &lt;- ir(9:0)</tt><tt><br>
+            </tt><tt>get()</tt><tt><br>
+            </tt><tt>accum &lt;- mbr</tt><tt><br>
+            </tt></td>
+        </tr>
+        <tr>
+          <td valign="top"><tt>STORE</tt></td>
+          <td valign="top"><tt>0x2001</tt><tt><br>
+            </tt></td>
+          <td valign="top"><tt>Take the value stored in the accum and
+              place it into the mar at the address specified</tt><tt><br>
+            </tt></td>
+          <td valign="top"><tt>mar(15:10) &lt;- 0</tt><br>
+            <tt>mar(9:0) &lt;- ir(9:0)</tt><tt><br>
+            </tt><tt>mbr(9:0) &lt;- accum</tt><tt><br>
+            </tt><tt>put()</tt><tt><br>
+            </tt></td>
+        </tr>
+        <tr>
+          <td valign="top"><tt>ADDC</tt><tt><br>
+            </tt></td>
+          <td valign="top"><tt>0x3000</tt><tt><br>
+            </tt></td>
+          <td valign="top"><tt>Add the counter to the accumulator</tt><tt><br>
+            </tt></td>
+          <td valign="top"><tt>accum &lt;- accum + ctr</tt><tt><br>
+            </tt></td>
+        </tr>
+        <tr>
+          <td valign="top"><tt>MVAC</tt></td>
+          <td valign="top"><tt>0x4000</tt></td>
+          <td valign="top"><tt>move the accum to the acounter</tt><tt><br>
+            </tt></td>
+          <td valign="top"><tt>ctr &lt;- accum</tt></td>
+        </tr>
+        <tr>
+          <td valign="top"><tt>JEQ 0x24</tt><tt><br>
+            </tt></td>
+          <td valign="top"><tt>0x5024</tt></td>
+          <td valign="top"><tt>If the counter register </tt><tt><b>is</b></tt><tt>
+              zero:</tt><tt><br>
+            </tt><tt>
+            </tt><tt>&nbsp;&nbsp;&nbsp; set the pc to the address in the instruction</tt><tt><br>
+            </tt>
+          </td>
+          <td valign="top"><tt>if (ctr </tt><tt><b>==</b></tt><tt> 0) {</tt><tt><br>
+            </tt>
+            <tt>pc(15:10) &lt;- 0</tt><tt><br>
+            </tt>
+            <tt>pc(9:0) &lt;- ir(9:0)</tt><tt><br>
+            </tt>
+            <tt>}</tt><tt><br>
+            </tt>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top"><tt>JLT</tt><tt> 0x24</tt><tt><br>
+            </tt></td>
+          <td valign="top"><tt>0x6024</tt><tt><br>
+            </tt></td>
+          <td valign="top"><tt>If the counter register is </tt><tt><b>less
+                than</b></tt><tt> zero:</tt><tt><br>
+            </tt><tt>
+            </tt><tt>
+            </tt><tt>&nbsp;&nbsp;&nbsp; set the pc to the address in the instruction</tt><tt><br>
+            </tt></td>
+          <td valign="top"><tt>if (ctr </tt><tt>&gt;</tt><tt> 0) {</tt><tt><br>
+            </tt>
+            <tt>pc(15:10) &lt;- 0</tt><tt><br>
+            </tt>
+            <tt>pc(9:0) &lt;- ir(9:0)</tt><tt><br>
+            </tt>
+            <tt>}</tt></td>
+        </tr>
+        <tr>
+          <td valign="top"><tt>JMP<br>
+            </tt></td>
+          <td valign="top"><tt>0X7</tt><tt>024<br>
+            </tt></td>
+          <td valign="top"><tt>set the pc to the address in the
+              instruction!<br>
+            </tt></td>
+          <td valign="top"><tt>pc(15:10) &lt;- 0</tt><tt><br>
+            </tt>
+            <tt>pc(9:0) &lt;- ir(9:0)</tt></td>
+        </tr>
+        <tr>
+          <td valign="top"><tt>ADD<br>
+            </tt></td>
+          <td valign="top"><tt>0X8005</tt><tt><br>
+            </tt></td>
+          <td valign="top"><tt>Go to the address (5) and place the value
+              stored there in the mbr<br>
+              set the accum equal to the accum <b>plus</b> the value in
+              the mbr<br>
+              <br>
+              <br>
+            </tt></td>
+          <td valign="top"><tt>mar(15:10) &lt;- 0<br>
+            </tt><tt><tt>mar(9:0) &lt;- ir(9:0)</tt><tt><br>
+              </tt>get()<br>
+              accum &lt;- mbr + accum<br>
+            </tt></td>
+        </tr>
+        <tr>
+          <td valign="top"><tt>SUB<br>
+            </tt></td>
+          <td valign="top"><tt>0X9006</tt><tt><br>
+            </tt></td>
+          <td valign="top"><tt>Go to the address (6) and place the value
+              stored there in the mbr<br>
+              set the accum equal to the accum <b>minus</b> the value
+              in the mbr<br>
+            </tt></td>
+          <td valign="top"><tt>mar(15:10) &lt;- 0</tt><br>
+            <tt><tt>mar(9:0) &lt;- ir(9:0)</tt><tt><br>
+              </tt>
+              get()<br>
+              accum &lt;- mbr - accum</tt></td>
+        </tr>
+        <tr>
+          <td valign="top"><tt>DEC<br>
+            </tt></td>
+          <td valign="top"><tt>0XA000</tt><tt><br>
+            </tt></td>
+          <td valign="top"><tt>set ctr equal to ctr minus one<br>
+            </tt></td>
+          <td valign="top">
+            <meta charset="utf-8">
+            <span class="n" style="margin: 0px; padding: 0px;
+              line-height: 16.78333282470703px; color: rgb(0, 0, 0);
+              font-family: 'Bitstream Vera Sans Mono', Courier,
+              monospace; font-size: 12px; font-style: normal;
+              font-variant: normal; font-weight: normal; letter-spacing:
+              normal; orphans: 2; text-align: left; text-indent: 0px;
+              text-transform: none; white-space: pre; widows: 2;
+              word-spacing: 0px; -webkit-text-size-adjust: auto;
+              -webkit-text-stroke-width: 0px; background-color: rgb(255,
+              255, 255); ">ctr</span><span style="color: rgb(0, 0, 0);
+              font-family: 'Bitstream Vera Sans Mono', Courier,
+              monospace; font-size: 12px; font-style: normal;
+              font-variant: normal; font-weight: normal; letter-spacing:
+              normal; line-height: 16.78333282470703px; orphans: 2;
+              text-align: left; text-indent: 0px; text-transform: none;
+              white-space: pre; widows: 2; word-spacing: 0px;
+              -webkit-text-size-adjust: auto; -webkit-text-stroke-width:
+              0px; background-color: rgb(255, 255, 255); display: inline
+              !important; float: none; "> = ctr - 1 </span><span
+              class="o" style="margin: 0px; padding: 0px; line-height:
+              16.78333282470703px; font-weight: bold; color: rgb(0, 0,
+              0); font-family: 'Bitstream Vera Sans Mono', Courier,
+              monospace; font-size: 12px; font-style: normal;
+              font-variant: normal; letter-spacing: normal; orphans: 2;
+              text-align: left; text-indent: 0px; text-transform: none;
+              white-space: pre; widows: 2; word-spacing: 0px;
+              -webkit-text-size-adjust: auto; -webkit-text-stroke-width:
+              0px; background-color: rgb(255, 255, 255); "></span><span
+              style="color: rgb(0, 0, 0); font-family: 'Bitstream Vera
+              Sans Mono', Courier, monospace; font-size: 12px;
+              font-style: normal; font-variant: normal; font-weight:
+              normal; letter-spacing: normal; line-height:
+              16.78333282470703px; orphans: 2; text-align: left;
+              text-indent: 0px; text-transform: none; white-space: pre;
+              widows: 2; word-spacing: 0px; -webkit-text-size-adjust:
+              auto; -webkit-text-stroke-width: 0px; background-color:
+              rgb(255, 255, 255); display: inline !important; float:
+              none; "></span><span class="mi" style="margin: 0px;
+              padding: 0px; line-height: 16.78333282470703px; color:
+              rgb(0, 153, 153); font-family: 'Bitstream Vera Sans Mono',
+              Courier, monospace; font-size: 12px; font-style: normal;
+              font-variant: normal; font-weight: normal; letter-spacing:
+              normal; orphans: 2; text-align: left; text-indent: 0px;
+              text-transform: none; white-space: pre; widows: 2;
+              word-spacing: 0px; -webkit-text-size-adjust: auto;
+              -webkit-text-stroke-width: 0px; background-color: rgb(255,
+              255, 255); "></span></td>
+        </tr>
+        <tr>
+          <td valign="top"><tt>LA<br>
+            </tt></td>
+          <td valign="top"><tt>0xB000</tt><tt><br>
+            </tt></td>
+          <td valign="top"><tt><br>
+            </tt></td>
+          <td valign="top"><tt>mar(15:10) &lt;- 0<br>
+              accum &lt;- ir(9:0)<br>
+            </tt></td>
+        </tr>
+        <tr>
+          <td valign="top"><tt>LIA<br>
+            </tt></td>
+          <td valign="top"><tt>0xC000</tt><tt><br>
+            </tt></td>
+          <td valign="top"><tt>take the address in the accumulator and
+              pass it to the memory address register<br>
+              de-reference it<br>
+              store the dereferenced value in the memory buffer registry<br>
+              <br>
+            </tt></td>
+          <td valign="top"><tt>mar &lt;- accum<br>
+              get()<br>
+              accum &lt;- mbr<br>
+            </tt></td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>
