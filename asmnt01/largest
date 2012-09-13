@@ -6,7 +6,7 @@
 # | Program Area:                     |
 # -------------------------------------
 0x101d  #  [0]    LA  accum = (the first element in the array)
-0x201c  #  [1] STORE  accum to Largest[0x0011] Largest == 4
+0x201c  #  [1] STORE  accum to Largest
 0xb001  #  [2]    LA  accum = 1
 0x901b  #  [3]   SUB  accum = 8 - 1 (n - 1)
 0x201a  #  [4] STORE  ctrTEMP = accum 
